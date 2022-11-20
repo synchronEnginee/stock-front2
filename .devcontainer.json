@@ -1,0 +1,21 @@
+{
+  "name": "vite-sample2",
+  "dockerComposeFile": "../docker-compose.yaml",
+  "service": "front",
+  "workspaceFolder": "/usr/app/vite-sample2",
+  "postCreateCommand": "apk update && apk add git",
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "oderwat.indent-rainbow",
+        "esbenp.prettier-vscode",
+        "burkeholland.simple-react-snippets",
+        "infeng.vscode-react-typescript",
+        "steoates.autoimport",
+        "eamodio.gitlens"
+      ]
+    }
+  }
+}
