@@ -1,8 +1,8 @@
 {
-  "name": "vite-sample2",
-  "dockerComposeFile": "../docker-compose.yaml",
+  "name": "stock-front2",
+  "dockerComposeFile": "./docker-compose.yaml",
   "service": "front",
-  "workspaceFolder": "/usr/app/vite-sample2",
+  "workspaceFolder": "/usr/app/stock-front2",
   "postCreateCommand": "apk update && apk add git",
   "shutdownAction": "stopCompose",
   "customizations": {
