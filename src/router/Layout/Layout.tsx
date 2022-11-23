@@ -1,4 +1,4 @@
-import React from 'react'
+import { useRef } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import {
   Drawer,
@@ -14,13 +14,15 @@ import {
 } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 
+import { FALLSTOCK_URL, COMPARE_URL, DIVIDENDLIST_URL } from '../url'
+
 /**
  * SPAのレイアウト.
  * ヘッダーとサイドDrawer
  */
 const Layout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef<any>()
+  const btnRef = useRef<any>()
 
   return (
     <>
@@ -47,13 +49,18 @@ const Layout = () => {
           <DrawerBody>
             <List spacing={3}>
               <ListItem>
-                <Link to="/fallstock">
+                <Link to={FALLSTOCK_URL}>
                   <Button colorScheme="blue">下落率順</Button>
                 </Link>
               </ListItem>
               <ListItem>
-                <Link to="/compare">
+                <Link to={COMPARE_URL}>
                   <Button colorScheme="blue">銘柄比較</Button>
+                </Link>
+              </ListItem>
+              <ListItem>
+                <Link to={DIVIDENDLIST_URL}>
+                  <Button colorScheme="blue">配当リスト</Button>
                 </Link>
               </ListItem>
             </List>

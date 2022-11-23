@@ -2,7 +2,15 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, useContext } from 'react'
+import {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  useReducer,
+  useCallback,
+  useMemo,
+} from 'react'
 import { css } from '@emotion/react'
 
 import {
@@ -58,7 +66,8 @@ const defaultColumn: Partial<ColumnDef<ComparisonStockInfo>> = {
   cell: ({ getValue, row: { index }, column: { id }, table }) => {
     const initialValue = getValue()
     // We need to keep and update the state of the cell normally
-    const [value, setValue] = React.useState(initialValue)
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [value, setValue] = useState<any>(initialValue)
 
     // When the input is blurred, we'll call our table meta's updateData function
     const onBlur = () => {
@@ -66,7 +75,8 @@ const defaultColumn: Partial<ColumnDef<ComparisonStockInfo>> = {
     }
 
     // If the initialValue is changed external, sync it up with our state
-    React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
       setValue(initialValue)
     }, [initialValue])
 
@@ -133,15 +143,15 @@ const Filter = ({
 
 // pagingカスタムフック
 const useSkipper = () => {
-  const shouldSkipRef = React.useRef(true)
+  const shouldSkipRef = useRef(true)
   const shouldSkip = shouldSkipRef.current
 
   // Wrap a function with this to skip a pagination reset temporarily
-  const skip = React.useCallback(() => {
+  const skip = useCallback(() => {
     shouldSkipRef.current = false
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     shouldSkipRef.current = true
   })
 
@@ -156,13 +166,13 @@ const useSkipper = () => {
  */
 const ComparisonList = (props: ComparisonProps) => {
   const { stockData } = props
-  const rerender = React.useReducer(() => ({}), {})[1]
+  const rerender = useReducer(() => ({}), {})[1]
 
   // テーブルに渡すデータ（とりあえず固定値）
-  const [data, setData] = React.useState<ComparisonStockInfo[]>(stockData)
+  const [data, setData] = useState<ComparisonStockInfo[]>(stockData)
 
   // カラム定義
-  const columns = React.useMemo<Array<ColumnDef<ComparisonStockInfo>>>(
+  const columns = useMemo<Array<ColumnDef<ComparisonStockInfo>>>(
     () => [
       {
         header: '銘柄リスト',
